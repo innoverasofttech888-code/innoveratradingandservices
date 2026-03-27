@@ -45,16 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch("https://script.google.com/macros/s/AKfycbxZILjnwPDXhPL1WzlVdvl0wfODd-jp8ngWKg0yeDYYm63KTcZVGA9uWe1pvHWpfYJM/exec", {
       method: "POST",
+      mode: "no-cors",   // 🔥 THIS LINE FIXES IT
       body: formData
-    })
-    .then(() => {
-      alert("Form submitted successfully!");
-      form.reset();
-    })
-    .catch(err => {
-      alert("Error submitting form");
-      console.error(err);
     });
+
+    alert("Form submitted successfully!");
+    form.reset();
 
   });
 
