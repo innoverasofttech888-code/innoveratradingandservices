@@ -29,7 +29,7 @@ window.addEventListener('scroll', () => {
 });
 
 // =============================================
-// PASTE YOUR GOOGLE APPS SCRIPT URL BELOW
+// GOOGLE APPS SCRIPT URL
 // =============================================
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzDPXiZ2neQiHXjni6UYkiqzO0I213m3cHrUXfn_SYqqbKWA4KHG1t0fntwmwxtDvaM/exec';
 // =============================================
@@ -45,14 +45,13 @@ document.querySelector('.contact-form').addEventListener('submit', async (e) => 
   btn.style.opacity = '0.7';
   btn.disabled = true;
 
-  // URLSearchParams sent as GET is the most reliable method for Google Apps Script
-  // Apps Script reads each field via e.parameter.name, e.parameter.email etc.
+  // Read values using name attributes (more reliable than placeholder selectors)
   const params = new URLSearchParams({
-    name:    form.querySelector('input[placeholder="Your Name"]').value,
-    email:   form.querySelector('input[placeholder="Email Address"]').value,
-    company: form.querySelector('input[placeholder="Company Name"]').value,
-    website: form.querySelector('input[placeholder="Website URL"]').value,
-    message: form.querySelector('textarea').value
+    name:    form.querySelector('[name="name"]').value,
+    email:   form.querySelector('[name="email"]').value,
+    company: form.querySelector('[name="company"]').value,
+    website: form.querySelector('[name="website"]').value,
+    message: form.querySelector('[name="message"]').value
   });
 
   try {
@@ -62,13 +61,13 @@ document.querySelector('.contact-form').addEventListener('submit', async (e) => 
     });
 
     // Success state
-    btn.textContent = 'REQUEST SENT!';
+    btn.textContent = '✓ REQUEST SENT!';
     btn.style.background = '#22c55e';
     btn.style.opacity = '1';
     form.reset();
 
   } catch (error) {
-    btn.textContent = 'SOMETHING WENT WRONG';
+    btn.textContent = '✕ SOMETHING WENT WRONG';
     btn.style.background = '#ef4444';
     btn.style.opacity = '1';
     console.error('Form error:', error);
@@ -76,7 +75,7 @@ document.querySelector('.contact-form').addEventListener('submit', async (e) => 
 
   // Reset button after 4 seconds
   setTimeout(() => {
-    btn.textContent = 'GET MY FREE AUDIT';
+    btn.textContent = 'SUBMIT →';
     btn.style.background = '';
     btn.style.opacity = '1';
     btn.disabled = false;
