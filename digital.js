@@ -42,19 +42,22 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     const formData = {
-      name: this.name.value,
-      email: this.email.value,
-      company: this.company.value,
-      website: this.website.value,
-      message: this.message.value
+      name: form.name.value,
+      email: form.email.value,
+      company: form.company.value,
+      website: form.website.value,
+      message: form.message.value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbzjP5WIeMV7-efKUdZV2dd4p5mgYolA0IqinM1bpSoJWlZpJAuRuEGzp4RqTg5Rjr2b/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxZILjnwPDXhPL1WzlVdvl0wfODd-jp8ngWKg0yeDYYm63KTcZVGA9uWe1pvHWpfYJM/exec", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(formData)
     })
     .then(res => res.json())
-    .then(() => {
+    .then(data => {
       alert("Form submitted successfully!");
       form.reset();
     })
