@@ -41,23 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const formData = {
-      name: form.name.value,
-      email: form.email.value,
-      company: form.company.value,
-      website: form.website.value,
-      message: form.message.value
-    };
+    const formData = new FormData(form);
 
     fetch("https://script.google.com/macros/s/AKfycbxZILjnwPDXhPL1WzlVdvl0wfODd-jp8ngWKg0yeDYYm63KTcZVGA9uWe1pvHWpfYJM/exec", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
+      body: formData
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(() => {
       alert("Form submitted successfully!");
       form.reset();
     })
