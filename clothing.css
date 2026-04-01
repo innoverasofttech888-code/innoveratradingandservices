@@ -464,8 +464,6 @@ button { background: none; border: 0; cursor: pointer; }
 }
 .brand-card:hover::before { transform: scale(1.06); }
 .brand-one::before { background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.44)), url('https://sspark.genspark.ai/cfimages?u1=ykCXzHkYqcm2xGdlgbOIloILbyCdaVj%2BR%2Flma088SNcm8ONQdpiVmMxXCteOIY4fwhsx0e9wD4Ot4PI%2B6xwHVXZo2zATUm76LgSkMU2EJRAGuyCsw2%2BsF%2F0fAlJxLKriNL63BIEnkQbaBME%2BBzyXQTC%2FsxHq6PPMGKWn6bZ4x4G4XEJGoE9TrKagbqoIdILWQbspa%2FcmZtCKEkjYvEK6q11zXvNR4KapKP0NiA96pwdyV%2BKvvodeJafdmIGJf6uSF5FsA1SDYQ%3D%3D&u2=L5%2FQFAuoxUKKsQXm&width=2560') center top / cover no-repeat; }
-.brand-two::before { background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.38)), linear-gradient(135deg, #e8dfd4, #bea68f); }
-.brand-three::before { background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.38)), linear-gradient(135deg, #e5e5df, #bfc3b4); }
 .brand-four::before { background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.42)), url('https://sspark.genspark.ai/cfimages?u1=kPzIosClGtRRtV9Ba5YpTz69TyckebI8LAXJzCdoCp0C3VAWTSG5s8pwuqXYDpXNWRs%2F3QJ2WMg%2FTTuiADzmSbkNuyxf%2B9le%2F0dubceiHc%2BPDw%3D%3D&u2=lwY8St7Doqf44NEn&width=2560') center / cover no-repeat; }
 .brand-card-overlay {
   position: absolute;
