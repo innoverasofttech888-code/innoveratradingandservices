@@ -3,7 +3,7 @@
 // ============================================================
 
 // ⚠️  PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE:
-const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9_GE3sm9y9DqG5aeLWaVH4pxJ1Xnsga90wDw4VvppKfQrEn0JTLq54EqX7ODyQ2a8/exec";
+const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwb6AvvotS3wdNGOjD0UMx4AAj3Y9xcvff45bzQYmnbUNXWwuA4hSlakaRFjLTh1WI/exec";
 
 // ============================================================
 // Side Panel
@@ -86,9 +86,8 @@ tabButtons.forEach(button => {
 
 // ============================================================
 // Newsletter Form → Google Sheets
-// KEY FIX: Send as URLSearchParams (form-encoded), not JSON.
-// Google Apps Script reads this via e.parameter, which works
-// correctly with no-cors fetch — unlike JSON + e.postData.
+// Uses GET + URL params — same method as the working contact form
+// Apps Script reads email via e.parameter.email in doGet()
 // ============================================================
 const newsletterForm = document.getElementById('newsletter-form');
 const newsletterEmail = document.getElementById('newsletter-email');
@@ -105,13 +104,13 @@ newsletterForm?.addEventListener('submit', async (event) => {
   button.disabled = true;
   clearFormMessage();
 
+  const params = new URLSearchParams({ email });
+
   try {
-    // ✅ Send as URL-encoded form data — Apps Script reads via e.parameter.email
-    await fetch(SHEET_SCRIPT_URL, {
-      method: 'POST',
+    // ✅ GET request with URL params — same reliable method as your working site
+    await fetch(SHEET_SCRIPT_URL + '?' + params.toString(), {
+      method: 'GET',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ email }),
     });
 
     newsletterEmail.value = '';
