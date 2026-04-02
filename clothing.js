@@ -3,7 +3,7 @@
 // ============================================================
 
 // ⚠️  PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE:
-const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvpaibDhvfH-r7F0gKaLPb2GlYpbGC0U8ooMFsxRV0SkEASnNKSa2l_K3G2MRMpypT/exec";
+const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7m1nmjFOleHHBM8qqstLlPVv-36tit6Wt7Bq78RJmOTs7HdzjSkxxVXKVOjDtMjPd/exec";
 
 // ============================================================
 // Side Panel
@@ -86,6 +86,9 @@ tabButtons.forEach(button => {
 
 // ============================================================
 // Newsletter Form → Google Sheets
+// KEY FIX: Send as URLSearchParams (form-encoded), not JSON.
+// Google Apps Script reads this via e.parameter, which works
+// correctly with no-cors fetch — unlike JSON + e.postData.
 // ============================================================
 const newsletterForm = document.getElementById('newsletter-form');
 const newsletterEmail = document.getElementById('newsletter-email');
@@ -103,14 +106,14 @@ newsletterForm?.addEventListener('submit', async (event) => {
   clearFormMessage();
 
   try {
+    // ✅ Send as URL-encoded form data — Apps Script reads via e.parameter.email
     await fetch(SHEET_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', // required for Google Apps Script
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ email }),
     });
 
-    // no-cors means we can't read the response — optimistically show success
     newsletterEmail.value = '';
     button.textContent = 'Subscribed ✓';
     showFormMessage('success', '🎉 You\'re subscribed! Welcome to the Innovera network.');
@@ -121,7 +124,7 @@ newsletterForm?.addEventListener('submit', async (event) => {
     }, 2200);
 
   } catch (err) {
-    console.error('Newsletter submission error:', err);
+    console.error('Newsletter error:', err);
     showFormMessage('error', 'Something went wrong. Please try again.');
     button.textContent = originalLabel;
     button.disabled = false;
