@@ -3,7 +3,7 @@
 // ============================================================
 
 // ⚠️  PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE:
-const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7m1nmjFOleHHBM8qqstLlPVv-36tit6Wt7Bq78RJmOTs7HdzjSkxxVXKVOjDtMjPd/exec";
+const SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9_GE3sm9y9DqG5aeLWaVH4pxJ1Xnsga90wDw4VvppKfQrEn0JTLq54EqX7ODyQ2a8/exec";
 
 // ============================================================
 // Side Panel
