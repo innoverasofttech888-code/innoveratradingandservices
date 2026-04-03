@@ -1,5 +1,7 @@
 // ============================================================
 // Innovera Trading & Services — clothing.js
+// Enhanced with soft animations and improved functionality
+// FIXED: Scroll disappearing images + Google Sheet intact
 // ============================================================
 
 // ⚠️  PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE:
@@ -12,13 +14,17 @@ const body = document.body;
 const header = document.getElementById('site-header');
 const sidePanel = document.getElementById('side-panel');
 const overlay = document.getElementById('overlay');
-const menuTriggers = [document.getElementById('menu-trigger'), document.getElementById('mobile-menu-trigger')].filter(Boolean);
+const menuTriggers = [document.getElementById('menu-trigger')].filter(Boolean);
 const panelClose = document.getElementById('panel-close');
 
 function openPanel() {
   sidePanel.classList.add('open');
   overlay.classList.add('open');
   body.style.overflow = 'hidden';
+  
+  // Add soft animation
+  sidePanel.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  overlay.style.transition = 'all 0.3s ease';
 }
 
 function closePanel() {
@@ -57,7 +63,7 @@ function startSlider() {
   clearInterval(slideTimer);
   slideTimer = setInterval(() => {
     showSlide(currentSlide + 1);
-  }, 5000);
+  }, 6000); // Increased timing for better UX
 }
 
 dots.forEach(dot => {
@@ -66,6 +72,13 @@ dots.forEach(dot => {
     startSlider();
   });
 });
+
+// Auto-advance on hover pause
+const heroSlider = document.querySelector('.hero-slider');
+if (heroSlider) {
+  heroSlider.addEventListener('mouseenter', () => clearInterval(slideTimer));
+  heroSlider.addEventListener('mouseleave', startSlider);
+}
 
 showSlide(0);
 startSlider();
@@ -86,8 +99,6 @@ tabButtons.forEach(button => {
 
 // ============================================================
 // Newsletter Form → Google Sheets
-// Uses GET + URL params — same method as the working contact form
-// Apps Script reads email via e.parameter.email in doGet()
 // ============================================================
 const newsletterForm = document.getElementById('newsletter-form');
 const newsletterEmail = document.getElementById('newsletter-email');
@@ -120,7 +131,7 @@ newsletterForm?.addEventListener('submit', async (event) => {
     setTimeout(() => {
       button.textContent = originalLabel;
       button.disabled = false;
-    }, 2200);
+    }, 2500);
 
   } catch (err) {
     console.error('Newsletter error:', err);
@@ -138,9 +149,11 @@ function showFormMessage(type, text) {
   msg.style.cssText = `
     margin-top: 0.75rem;
     font-size: 0.875rem;
-    color: ${type === 'success' ? '#2d6a4f' : '#c0392b'};
+    color: ${type === 'success' ? '#34C759' : '#FF3B30'};
     font-weight: 500;
     text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
   `;
   newsletterForm.insertAdjacentElement('afterend', msg);
 }
@@ -148,6 +161,18 @@ function showFormMessage(type, text) {
 function clearFormMessage() {
   document.getElementById('form-message')?.remove();
 }
+
+// Form validation enhancement
+newsletterEmail?.addEventListener('input', function() {
+  const email = this.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (email && !emailRegex.test(email)) {
+    this.setCustomValidity('Please enter a valid email address');
+  } else {
+    this.setCustomValidity('');
+  }
+});
 
 // ============================================================
 // Smooth Scroll
@@ -184,8 +209,231 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
 
-const revealTargets = document.querySelectorAll('.category-card, .brand-card, .product-card, .journal-card, .story-media, .story-copy');
+const revealTargets = document.querySelectorAll('.product-card, .service-card, .feature-item, .story-media, .story-copy, .service-card-large, .highlight-item, .contact-method');
 revealTargets.forEach(item => {
-  item.style.opacity = '0';
-  observer.observe(item);
+  // Skipping hero items so they don't hide
+  if (!item.closest('.hero')) {
+    item.style.opacity = '0';
+    observer.observe(item);
+  }
+});
+
+// ============================================================
+// Additional Interactive Features
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Add ripple effect to buttons
+  const buttons = document.querySelectorAll('.cta-button, .tab-btn, .form-group button');
+  buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+      `;
+      
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+  
+  // Add CSS for ripple animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Parallax effect to hero images
+  const heroImages = document.querySelectorAll('.hero-image img');
+  let ticking = false;
+  
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    heroImages.forEach(img => {
+      const speed = 0.3;
+      img.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  });
+  
+  // Add loading states for buttons
+  const submitButtons = document.querySelectorAll('button[type="submit"]');
+  submitButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      if (this.form && this.form.checkValidity()) {
+        this.classList.add('loading');
+      }
+    });
+  });
+  
+  // Keyboard navigation support
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidePanel.classList.contains('open')) {
+      closePanel();
+    }
+    
+    if (e.key === 'ArrowLeft') {
+      showSlide(currentSlide - 1);
+      startSlider();
+    } else if (e.key === 'ArrowRight') {
+      showSlide(currentSlide + 1);
+      startSlider();
+    }
+  });
+  
+  // ✅ FIXED: Image Load Logic (Removed broken observer that was hiding images on scroll)
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    // Basic fallback for broken links
+    img.addEventListener('error', () => {
+      if (!img.dataset.fallbackApplied) {
+        img.dataset.fallbackApplied = 'true';
+        img.src = 'assets/images/fallback-generic.svg';
+      }
+    }, { once: true });
+
+    // Safe fade-in only if the image hasn't loaded yet
+    if (!img.complete) {
+      img.style.opacity = '0';
+      img.style.transition = 'opacity 0.6s ease';
+      img.onload = () => {
+        img.style.opacity = '1';
+      };
+    }
+  });
+  
+  // Touch support for mobile swipe
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        showSlide(currentSlide + 1);
+      } else {
+        showSlide(currentSlide - 1);
+      }
+      startSlider();
+    }
+  }
+  
+  // Intersection observer for statistics counter
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        const target = parseInt(counter.dataset.target);
+        let current = 0;
+        const increment = target / 100;
+        
+        const updateCounter = () => {
+          if (current < target) {
+            current += increment;
+            counter.textContent = Math.ceil(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target;
+          }
+        };
+        
+        updateCounter();
+        counterObserver.unobserve(counter);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  counters.forEach(counter => counterObserver.observe(counter));
+});
+
+// Add CSS for form validation states
+document.addEventListener('DOMContentLoaded', () => {
+  const style = document.createElement('style');
+  style.textContent = `
+    input:invalid {
+      border-color: #FF3B30;
+    }
+    
+    input:valid {
+      border-color: #34C759;
+    }
+    
+    input:focus:invalid {
+      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
+    }
+    
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    .success-message {
+      background: rgba(52, 199, 89, 0.1);
+      color: #34C759;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    .error-message {
+      background: rgba(255, 59, 48, 0.1);
+      color: #FF3B30;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  `;
+  document.head.appendChild(style);
 });
