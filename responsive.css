@@ -1,0 +1,700 @@
+/* ============================================================
+   Innovera Trading & Services — Responsive Design
+   ============================================================ */
+
+/* Tablet and Mobile Responsive Design */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.5rem; }
+    h3 { font-size: 2rem; }
+    h4 { font-size: 1.5rem; }
+    
+    .hero-title {
+        font-size: 2.75rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-content {
+        padding: 2.5rem;
+    }
+    
+    .nav-desktop {
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .story-content,
+    .catalog-cta,
+    .newsletter-content,
+    .contact-content {
+        gap: 3rem;
+    }
+    
+    .products-grid,
+    .services-grid {
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .export-features {
+        gap: 2rem;
+    }
+    
+    .footer-links {
+        gap: 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Typography adjustments */
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2.25rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.25rem; }
+    
+    p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .container {
+        padding: 0 16px;
+    }
+    
+    /* Header mobile */
+    .nav-desktop {
+        display: none;
+    }
+    
+    .menu-trigger {
+        display: flex;
+    }
+    
+    .header-content {
+        padding: 0.75rem 0;
+    }
+    
+    /* Hero mobile */
+    .hero {
+        margin-top: 70px;
+        min-height: 500px;
+    }
+    
+    .hero-slide {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        gap: 2rem;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+        margin: 0;
+        padding: 2rem;
+        order: 2;
+    }
+    
+    .hero-image {
+        margin-left: 0;
+        height: 250px;
+        order: 1;
+        width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-dots {
+        bottom: 2rem;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    /* CTA button mobile */
+    .cta-button {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.95rem;
+    }
+    
+    /* Sections mobile */
+    .story-section,
+    .products-section,
+    .services-section,
+    .catalog-section,
+    .newsletter-section,
+    .contact-section {
+        padding: 4rem 0;
+    }
+    
+    .section-header {
+        margin-bottom: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Story section mobile */
+    .story-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .story-media {
+        order: 1;
+    }
+    
+    .story-copy {
+        order: 2;
+    }
+    
+    .story-copy h3 {
+        font-size: 1.75rem;
+    }
+    
+    .highlight-item {
+        padding: 1rem;
+        text-align: left;
+    }
+    
+    /* Products tabs mobile */
+    .tabs-container {
+        max-width: 100%;
+    }
+    
+    .tab-buttons {
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+    
+    .tab-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    /* Products grid mobile */
+    .products-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .product-card,
+    .service-card {
+        border-radius: var(--radius-large);
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+    
+    .product-info,
+    .service-card {
+        padding: 1.75rem;
+    }
+    
+    .export-features {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .feature-item {
+        padding: 2rem 1.5rem;
+    }
+    
+    /* Services section mobile */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .service-card-large {
+        padding: 2.5rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .service-header {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .service-header i {
+        font-size: 2rem;
+    }
+    
+    .service-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    /* Catalog CTA mobile */
+    .catalog-cta {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .cta-content h3 {
+        font-size: 1.75rem;
+    }
+    
+    .cta-image {
+        border-radius: var(--radius-soft);
+        order: -1;
+    }
+    
+    /* Newsletter mobile */
+    .newsletter-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .newsletter-text h2 {
+        font-size: 2rem;
+    }
+    
+    .newsletter-form {
+        padding: 2rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .form-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .form-group input {
+        text-align: center;
+    }
+    
+    .form-group button {
+        padding: 1rem;
+    }
+    
+    /* Contact mobile */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .contact-info h3 {
+        font-size: 1.75rem;
+    }
+    
+    .contact-method {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .contact-cta {
+        padding: 2rem;
+    }
+    
+    /* Footer mobile */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .footer-brand {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .link-group {
+        text-align: left;
+    }
+    
+    .link-group h4 {
+        font-size: 1rem;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .footer-description {
+        font-size: 0.85rem;
+    }
+    
+    /* Side panel mobile */
+    .side-panel {
+        width: 100%;
+        border-radius: 0;
+        right: -100%;
+    }
+    
+    .side-panel-header {
+        padding: 1.5rem;
+    }
+    
+    .panel-nav {
+        padding: 1.5rem;
+    }
+    
+    .panel-nav-link {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .hero-content {
+        padding: 1.5rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .tab-buttons {
+        gap: 0.5rem;
+    }
+    
+    .tab-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+        min-width: 100px;
+    }
+    
+    .products-grid,
+    .services-grid {
+        gap: 1.5rem;
+    }
+    
+    .product-info,
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .export-features {
+        gap: 1.5rem;
+    }
+    
+    .feature-item {
+        padding: 1.5rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .feature-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .feature-icon i {
+        font-size: 1.75rem;
+    }
+    
+    .service-card-large {
+        padding: 2rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .service-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .service-header i {
+        font-size: 1.75rem;
+    }
+    
+    .catalog-cta {
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .newsletter-form {
+        padding: 1.5rem;
+        border-radius: var(--radius-large);
+    }
+    
+    .contact-method {
+        padding: 1rem;
+    }
+    
+    .contact-cta {
+        padding: 1.5rem;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .link-group {
+        text-align: center;
+    }
+    
+    .social-links {
+        gap: 0.75rem;
+    }
+    
+    .social-links a {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    .footer-bottom-links {
+        gap: 0.75rem;
+    }
+    
+    .footer-bottom-links a {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra small devices (max-width: 375px) */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-content {
+        padding: 1.25rem;
+    }
+    
+    .cta-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .tab-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.8rem;
+        min-width: 90px;
+    }
+    
+    .product-info,
+    .service-card {
+        padding: 1.25rem;
+    }
+    
+    .service-card-large {
+        padding: 1.5rem;
+    }
+    
+    .feature-item {
+        padding: 1.25rem;
+    }
+    
+    .newsletter-form {
+        padding: 1.25rem;
+    }
+    
+    .contact-method {
+        padding: 0.875rem;
+    }
+    
+    .contact-cta {
+        padding: 1.25rem;
+    }
+    
+    .social-links a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image img,
+    .story-media img,
+    .cta-image img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .cta-button:hover {
+        transform: none;
+        box-shadow: 0 8px 24px rgba(139, 123, 139, 0.3);
+    }
+    
+    .product-card:hover,
+    .service-card:hover,
+    .service-card-large:hover,
+    .feature-item:hover {
+        transform: none;
+    }
+    
+    .highlight-item:hover,
+    .contact-method:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .side-panel,
+    .overlay,
+    .hero-dots,
+    .newsletter-section,
+    .footer {
+        display: none;
+    }
+    
+    .hero {
+        height: auto;
+        min-height: auto;
+        margin-top: 0;
+    }
+    
+    .hero-slide {
+        position: static;
+        opacity: 1;
+        display: block;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+        padding: 2rem 0;
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        border: none;
+    }
+    
+    .story-section,
+    .products-section,
+    .services-section,
+    .catalog-section,
+    .contact-section {
+        padding: 2rem 0;
+    }
+    
+    .product-card,
+    .service-card,
+    .service-card-large,
+    .feature-item {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+/* PDF-driven responsive additions */
+@media (max-width: 1024px) {
+    .metrics-grid,
+    .revenue-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .metrics-grid,
+    .audience-grid,
+    .impact-grid,
+    .traction-grid,
+    .revenue-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mini-points {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .metric-card h3 {
+        font-size: 2.1rem;
+    }
+}
